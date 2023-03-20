@@ -1,0 +1,87 @@
+//=============================index.js
+
+
+const express=require("express")
+const {Server}=require("socket.io")
+const http=require("http")
+
+const app =express()
+
+const httpServer=http.createServer(app)
+
+httpServer.listen(8000)
+
+const wss=new Server(httpServer)
+
+wss.on("connection",(socket)=>{
+    console.log("client connected")
+    
+
+    socket.on("message",(data)=>{
+        console.log(data)
+        socket.emit("message","helloo from server")
+    })
+    socket.on("age",(age)=>{
+        console.log(age)
+        
+    })
+    socket.on("bye",(msg)=>{
+        console.log(msg)
+    })
+})
+
+app.get("/",(req,res)=>{
+    res.send("Chat Application")
+})
+app.get("/contact",(req,res)=>{
+    res.send("contact Application")
+})
+
+
+
+
+
+//===========================index.html
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket App</title>
+</head>
+
+<body>
+    <script src="https://cdn.socket.io/3.1.3/socket.io.min.js"
+        integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh"
+        crossorigin="anonymous"></script>
+    <h1>Socket App</h1>
+    <input id="input" type="text" placeholder="hello.......">
+    <input id="ageinput" type="text" placeholder="age.......">
+    <button onclick="handleclick()">Send</button>
+
+    <script>
+        
+        const socket = io("http://localhost:8000/", { transports: ["websocket"] })
+        socket.on("message", (msg) => {
+            console.log(msg)
+        })
+        const handleclick=()=>{
+            const text=document.getElementById("input").value
+            const age=document.getElementById("ageinput").value
+            socket.emit("message",text)
+            socket.emit("age",age)
+            socket.emit("bye","bye..bye")
+        }
+        
+    </script>
+</body>
+
+</html>
+
+//=============install 
+"express": "^4.18.2",
+    "nodemon": "^2.0.21",
+    "socket.io": "^4.6.1"

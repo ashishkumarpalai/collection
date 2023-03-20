@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket App</title>
+</head>
+
+<body>
+    <script src="https://cdn.socket.io/3.1.3/socket.io.min.js"
+        integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh"
+        crossorigin="anonymous"></script>
+    <h1>Socket App</h1>
+    <input id="input" type="text" placeholder="hello.......">
+    <input id="ageinput" type="text" placeholder="age.......">
+    <button onclick="handleclick()">Send</button>
+
+    <script>
+        
+        const socket = io("http://localhost:8000/", { transports: ["websocket"] })
+        socket.on("message", (msg) => {
+            console.log(msg)
+        })
+        const handleclick=()=>{
+            const text=document.getElementById("input").value
+            const age=document.getElementById("ageinput").value
+            socket.emit("message",text)
+            socket.emit("age",age)
+            socket.emit("bye","bye..bye")
+        }
+        
+    </script>
+</body>
+
+</html>
+
+
+
+<!-- ===========================                ==broadcasting -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket App</title>
+</head>
+
+<body>
+    <script src="https://cdn.socket.io/3.1.3/socket.io.min.js"
+        integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh"
+        crossorigin="anonymous"></script>
+    <h1>Socket App</h1>
+    <input id="input" type="text" placeholder="hello.......">
+    <input id="ageinput" type="text" placeholder="age.......">
+    <button onclick="handleclick()">Send</button>
+
+    <script>
+        
+        const socket = io("http://localhost:8000/", { transports: ["websocket"] })
+        socket.on("message", (msg) => {
+            console.log(msg)
+        })
+        const handleclick=()=>{
+            const text=document.getElementById("input").value
+            const age=document.getElementById("ageinput").value
+            socket.emit("message",text)
+            socket.emit("age",age)
+            socket.emit("bye","bye..bye")
+        }
+        
+    </script>
+</body>
+
+</html> -->
+
+<!-- ===============================sorcket.io -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket App</title>
+</head>
+
+<body>
+    <script src="https://cdn.socket.io/3.1.3/socket.io.min.js"
+        integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh"
+        crossorigin="anonymous"></script>
+    <h1>Socket App</h1>
+    <input id="input" type="text" placeholder="hello.......">
+    <input id="ageinput" type="text" placeholder="age.......">
+    <button onclick="handleclick()">Send</button>
+
+    <script>
+        
+        const socket = io("http://localhost:8000/", { transports: ["websocket"] })
+        socket.on("message", (msg) => {
+            console.log(msg)
+        })
+        const handleclick=()=>{
+            const text=document.getElementById("input").value
+            const age=document.getElementById("ageinput").value
+            socket.emit("message",text)
+            socket.emit("age",age)
+            socket.emit("bye","bye..bye")
+        }
+        
+    </script>
+</body>
+
+</html> -->
